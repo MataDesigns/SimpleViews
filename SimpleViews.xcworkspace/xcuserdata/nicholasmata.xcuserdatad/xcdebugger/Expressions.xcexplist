@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "SimpleTableView.reloadData() -&gt; ():SimpleTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.totalRows">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SimpleTableView.totalRows.getter:SimpleTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "numberOfSections">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SimpleTableView.performTransition(forView : UIView?, withTransition : SimpleViewTransition, isStart : Bool) -&gt; ():SimpleTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "view?.alpha">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
