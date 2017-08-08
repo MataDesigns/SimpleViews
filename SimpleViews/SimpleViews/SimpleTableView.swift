@@ -100,19 +100,24 @@ public class SimpleTableView: UITableView {
     
     public func initialize() {
         guard let simpleDelegate = self.simpleDelegate else {
+            print("SimpleTableView: WARNING! Trying to initialize before simpleDelegate is set.")
             return
         }
         
+        // Perform in transition for loading view.
         let loadingView = simpleDelegate.view(forState: .loading)
         let loadingTransition = simpleDelegate.transition(forState: .loading)
         perform(transition: loadingTransition, forView: loadingView, transitionState: .in)
         
+        // Hide empty view
         let emptyView = simpleDelegate.view(forState: .empty)
         emptyView.isHidden = true;
         emptyView.alpha = 0.0
         
-        self.isHidden = true;
-        self.alpha = 0.0
+        // Hide content/finished view
+        let contentView = simpleDelegate.view(forState: .finished)
+        contentView.isHidden = true;
+        contentView.alpha = 0.0
     }
     
     public override func reloadData() {
