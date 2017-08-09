@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:SimpleViews.podspec">
+   </FileRef>
+   <FileRef
       location = "group:SimpleViews/SimpleViews.xcodeproj">
    </FileRef>
    <FileRef
