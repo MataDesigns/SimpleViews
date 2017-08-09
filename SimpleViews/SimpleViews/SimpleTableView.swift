@@ -12,12 +12,44 @@ import UIKit
     func view(forState state: SimpleViewState) -> UIView
     func transition(forState state: SimpleViewState) -> SimpleTransition
     @objc optional func transitionOut(forState state: SimpleViewState) -> SimpleTransition
+    @objc optional func changed(from oldState: SimpleViewState, to state: SimpleViewState)
 }
 
 public class SimpleTableView: UITableView {
     
     /// Current state of the TableView.
-    public var state: SimpleViewState = .loading
+    public var state: SimpleViewState = .loading {
+        didSet {
+            DispatchQueue.global(qos: .background).sync {
+                // Notify delegate that the state did change.
+                self.simpleDelegate?.changed?(from: oldValue, to: state)
+            }
+            
+            // In order to perform transitions simpleDelegate must be set.
+            guard let simpleDelegate = self.simpleDelegate else {
+                return
+            }
+            // Get view for previous state.
+            let previousView = simpleDelegate.view(forState: oldValue)
+            // Get out transition for previous state.
+            var outTransition = simpleDelegate.transitionOut?(forState: oldValue)
+            if (outTransition == nil) {
+                // Get out transition for previous state based of in transition.
+                outTransition = simpleDelegate.transition(forState: oldValue)
+            }
+            // Get view for current state.
+            let view = simpleDelegate.view(forState: state)
+            // Only perform transition if views are different.
+            if previousView != view {
+                // Perform out transition for previous state.
+                perform(transition: outTransition!, forView: previousView, transitionState: .out)
+                // Get in transition for current state.
+                let inTransition = simpleDelegate.transition(forState: state)
+                // Perform in transition for current state.
+                perform(transition: inTransition, forView: view, transitionState: .in)
+            }
+        }
+    }
     
     /// Whether or not data has been fetched.
     public var fetched: Bool = false
@@ -94,6 +126,9 @@ public class SimpleTableView: UITableView {
             }, completion: { (completed) in
                 view.isHidden = !isIn
             })
+        case .none:
+            view.isHidden = !isIn
+            break
         }
         
     }
@@ -104,35 +139,24 @@ public class SimpleTableView: UITableView {
             return
         }
         
-        // Perform in transition for loading view.
-        let loadingView = simpleDelegate.view(forState: .loading)
-        let loadingTransition = simpleDelegate.transition(forState: .loading)
-        perform(transition: loadingTransition, forView: loadingView, transitionState: .in)
-        
         // Hide empty view
         let emptyView = simpleDelegate.view(forState: .empty)
-        emptyView.isHidden = true;
+        emptyView.isHidden = true
         emptyView.alpha = 0.0
         
         // Hide content/finished view
         let contentView = simpleDelegate.view(forState: .finished)
-        contentView.isHidden = true;
+        contentView.isHidden = true
         contentView.alpha = 0.0
+        
+        // Perform in transition for loading view.
+        let loadingView = simpleDelegate.view(forState: .loading)
+        let loadingTransition = simpleDelegate.transition(forState: .loading)
+        perform(transition: loadingTransition, forView: loadingView, transitionState: .in)
+
     }
     
     public override func reloadData() {
-        guard let simpleDelegate = self.simpleDelegate else {
-            super.reloadData()
-            return
-        }
-        
-        let previousView = simpleDelegate.view(forState: state)
-        var outTransition = simpleDelegate.transitionOut?(forState: state)
-        if (outTransition == nil) {
-            outTransition = simpleDelegate.transition(forState: state)
-        }
-        
-        
         if fetched {
             // Set states based off rows.
             switch totalRows {
@@ -146,16 +170,6 @@ public class SimpleTableView: UITableView {
         } else {
             state = .loading
         }
-        
-        
-        let view = simpleDelegate.view(forState: state)
-        if previousView != view {
-            perform(transition: outTransition!, forView: previousView, transitionState: .out)
-            let inTransition = simpleDelegate.transition(forState: state)
-            perform(transition: inTransition, forView: view, transitionState: .in)
-        }
-        
-        
         
         super.reloadData()
     }

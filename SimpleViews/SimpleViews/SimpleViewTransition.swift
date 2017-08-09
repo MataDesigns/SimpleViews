@@ -9,7 +9,7 @@
 import UIKit
 
 @objc public enum SimpleTransition: Int {
-    case fade, leftToRight, rightToLeft, slideUp, slideDown
+    case none, fade, leftToRight, rightToLeft, slideUp, slideDown
 }
 
 public enum SimpleTransitionState {

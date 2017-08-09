@@ -21,34 +21,58 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
     @IBOutlet weak var loadingView: SimpleStateView!
     @IBOutlet weak var emptyView: SimpleStateView!
     
+    @IBOutlet weak var errorSwitch: UISwitch!
+    @IBOutlet weak var errorSwitchLabel: UILabel!
+    
     var posts = [[String:Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.simpleDelegate = self
         tableView.isHidden = true
-        // Do any additional setup after loading the view, typically from a nib.
+        
         let urlString = "http://jsonplaceholder.typicode.com/posts"
         guard let requestUrl = URL(string:urlString) else { return }
         let request = URLRequest(url:requestUrl)
         
-        let task = URLSession.shared.dataTask(with: request) {
-            (data, response, error) in
-            if error == nil,let usableData = data {
-                guard let json = try? JSONSerialization.jsonObject(with: usableData, options: []) as! [[String:Any]] else {
-                    return
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {
+            
+            let task = URLSession.shared.dataTask(with: request) {
+                (data, response, error) in
+                if error == nil,let usableData = data {
+                    guard let jsonData = try? JSONSerialization.jsonObject(with: usableData, options: [])else {
+                        self.tableView.state = .failed
+                        return
+                    }
+                    
+                    guard let json = jsonData as? [[String: Any]] else {
+                        self.tableView.state = .failed
+                        return
+                    }
+                    
+                    DispatchQueue.main.sync {
+                        self.errorSwitchLabel.textColor = .lightGray
+                        self.errorSwitch.isEnabled = false
+                    }
+                    
+                    guard !self.errorSwitch.isOn else {
+                        self.tableView.state = .failed
+                        return
+                    }
+                    
+                    self.posts.append(contentsOf: json)
+                    
+                    DispatchQueue.main.sync {
+                        self.tableView.fetched = true;
+                        self.tableView.reloadData()
+                    }
+                } else if error != nil {
+                    self.tableView.state = .failed
                 }
-                
-                self.posts.append(contentsOf: json)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
-                    self.tableView.fetched = true;
-                    self.tableView.reloadData()
-                })
             }
+            task.resume()
         }
-        
-        task.resume()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,6 +101,26 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
         return cell;
     }
     
+    func changed(from oldState: SimpleViewState, to state: SimpleViewState) {
+        switch state {
+        case .finished:
+            UIView.animate(withDuration: 0.0, animations: {
+                self.errorSwitchLabel.isHidden = true
+                self.errorSwitch.isHidden = true
+            })
+            break
+        case .loading:
+            break
+        case .empty:
+            break
+        case.failed:
+            DispatchQueue.main.async {
+                self.loadingView.backgroundColor = .red
+            }
+        }
+        
+    }
+    
     func transition(forState state: SimpleViewState) -> SimpleTransition {
         switch state {
         case .finished:
@@ -85,6 +129,8 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
             return .slideUp
         case.empty:
             return .fade
+        case .failed:
+            return .none
         }
     }
     
@@ -94,8 +140,10 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
             return .slideDown
         case .loading:
             return .slideDown
-        case.empty:
+        case .empty:
             return .fade
+        case .failed:
+            return .none
         }
     }
     
@@ -107,6 +155,8 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
             return self.loadingView
         case.empty:
             return self.emptyView
+        case .failed:
+            return self.loadingView
         }
     }
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 @objc public enum SimpleViewState: Int {
-    case loading, empty, finished
+    case loading, empty, finished, failed
 }
