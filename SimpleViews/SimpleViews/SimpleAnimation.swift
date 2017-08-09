@@ -8,10 +8,10 @@
 
 import UIKit
 
-@objc public enum SimpleTransition: Int {
+@objc public enum SimpleAnimation: Int {
     case none, fade, leftToRight, rightToLeft, slideUp, slideDown
 }
 
-public enum SimpleTransitionState {
+public enum SimpleAnimationState {
     case `in`, out
 }

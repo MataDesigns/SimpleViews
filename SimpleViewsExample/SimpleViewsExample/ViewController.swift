@@ -14,7 +14,7 @@ class PostCell :UITableViewCell {
     @IBOutlet weak var body: UILabel!
 }
 
-class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDelegate {
     
     @IBOutlet weak var tableView: SimpleTableView!
     
@@ -101,7 +101,7 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
         return cell;
     }
     
-    func changed(from oldState: SimpleViewState, to state: SimpleViewState) {
+    func simpleTableView(_ simpleTableView: SimpleTableView, stateChangedFrom oldState: SimpleViewState, to state: SimpleViewState) {
         switch state {
         case .finished:
             UIView.animate(withDuration: 0.0, animations: {
@@ -118,10 +118,9 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
                 self.loadingView.backgroundColor = .red
             }
         }
-        
     }
     
-    func transition(forState state: SimpleViewState) -> SimpleTransition {
+    func simpleTableView(_ simpleTableView: SimpleTableView, animationFor state: SimpleViewState) -> SimpleAnimation {
         switch state {
         case .finished:
             return .slideUp
@@ -134,7 +133,7 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
         }
     }
     
-    func transitionOut(forState state: SimpleViewState) -> SimpleTransition {
+    func simpleTableView(_ simpleTableView: SimpleTableView, outAnimationFor state: SimpleViewState) -> SimpleAnimation {
         switch state {
         case .finished:
             return .slideDown
@@ -147,7 +146,7 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleViewDelegat
         }
     }
     
-    func view(forState state: SimpleViewState) -> UIView {
+    func simpleTableView(_ simpleTableView: SimpleTableView, viewFor state: SimpleViewState) -> UIView {
         switch state {
         case .finished:
             return self.tableView

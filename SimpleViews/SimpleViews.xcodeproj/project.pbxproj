@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A112A40F1F3977BB009BD053 /* SimpleViewTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112A40E1F3977BB009BD053 /* SimpleViewTransition.swift */; };
+		A112A40F1F3977BB009BD053 /* SimpleAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112A40E1F3977BB009BD053 /* SimpleAnimation.swift */; };
 		A112A4111F397834009BD053 /* SimpleViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112A4101F397834009BD053 /* SimpleViewState.swift */; };
 		A11A02CE1F2D27D20041B56A /* SimpleViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A11A02C41F2D27D20041B56A /* SimpleViews.framework */; };
 		A11A02D31F2D27D20041B56A /* SimpleViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A02D21F2D27D20041B56A /* SimpleViewsTests.swift */; };
@@ -29,7 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A112A40E1F3977BB009BD053 /* SimpleViewTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleViewTransition.swift; sourceTree = "<group>"; };
+		A112A40E1F3977BB009BD053 /* SimpleAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAnimation.swift; sourceTree = "<group>"; };
 		A112A4101F397834009BD053 /* SimpleViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleViewState.swift; sourceTree = "<group>"; };
 		A11A02C41F2D27D20041B56A /* SimpleViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SimpleViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11A02C71F2D27D20041B56A /* SimpleViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleViews.h; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 				A11A02E01F2D29340041B56A /* SimpleStateView.swift */,
 				A1BBD06E1F2D3DA5009967D6 /* SimpleRoundView.swift */,
 				A1BBD0721F2D3E23009967D6 /* SimpleRoundButton.swift */,
-				A112A40E1F3977BB009BD053 /* SimpleViewTransition.swift */,
+				A112A40E1F3977BB009BD053 /* SimpleAnimation.swift */,
 				A112A4101F397834009BD053 /* SimpleViewState.swift */,
 			);
 			path = SimpleViews;
@@ -220,7 +220,7 @@
 				A11A02E11F2D29340041B56A /* SimpleStateView.swift in Sources */,
 				A1BBD0731F2D3E23009967D6 /* SimpleRoundButton.swift in Sources */,
 				A1BBD06F1F2D3DA5009967D6 /* SimpleRoundView.swift in Sources */,
-				A112A40F1F3977BB009BD053 /* SimpleViewTransition.swift in Sources */,
+				A112A40F1F3977BB009BD053 /* SimpleAnimation.swift in Sources */,
 				A112A4111F397834009BD053 /* SimpleViewState.swift in Sources */,
 				A11A02DF1F2D27FC0041B56A /* SimpleTableView.swift in Sources */,
 			);
