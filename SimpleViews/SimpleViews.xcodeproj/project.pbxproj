@@ -14,6 +14,7 @@
 		A11A02D51F2D27D20041B56A /* SimpleViews.h in Headers */ = {isa = PBXBuildFile; fileRef = A11A02C71F2D27D20041B56A /* SimpleViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A11A02DF1F2D27FC0041B56A /* SimpleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A02DE1F2D27FC0041B56A /* SimpleTableView.swift */; };
 		A11A02E11F2D29340041B56A /* SimpleStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A02E01F2D29340041B56A /* SimpleStateView.swift */; };
+		A16F70CC1F4C9B1E00636453 /* SimpleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16F70CB1F4C9B1E00636453 /* SimpleCollectionView.swift */; };
 		A1BBD06F1F2D3DA5009967D6 /* SimpleRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBD06E1F2D3DA5009967D6 /* SimpleRoundView.swift */; };
 		A1BBD0731F2D3E23009967D6 /* SimpleRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBD0721F2D3E23009967D6 /* SimpleRoundButton.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 		A11A02D41F2D27D20041B56A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11A02DE1F2D27FC0041B56A /* SimpleTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTableView.swift; sourceTree = "<group>"; };
 		A11A02E01F2D29340041B56A /* SimpleStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleStateView.swift; sourceTree = "<group>"; };
+		A16F70CB1F4C9B1E00636453 /* SimpleCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCollectionView.swift; sourceTree = "<group>"; };
 		A1BBD06E1F2D3DA5009967D6 /* SimpleRoundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRoundView.swift; sourceTree = "<group>"; };
 		A1BBD0721F2D3E23009967D6 /* SimpleRoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRoundButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 				A1BBD0721F2D3E23009967D6 /* SimpleRoundButton.swift */,
 				A112A40E1F3977BB009BD053 /* SimpleAnimation.swift */,
 				A112A4101F397834009BD053 /* SimpleViewState.swift */,
+				A16F70CB1F4C9B1E00636453 /* SimpleCollectionView.swift */,
 			);
 			path = SimpleViews;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A16F70CC1F4C9B1E00636453 /* SimpleCollectionView.swift in Sources */,
 				A11A02E11F2D29340041B56A /* SimpleStateView.swift in Sources */,
 				A1BBD0731F2D3E23009967D6 /* SimpleRoundButton.swift in Sources */,
 				A1BBD06F1F2D3DA5009967D6 /* SimpleRoundView.swift in Sources */,
