@@ -139,7 +139,7 @@ public class SimpleTableView: UITableView {
             if fetched {
                 // Set states based off row count.
                 switch totalRows {
-                case let rows where rows > 1:
+                case let rows where rows > 0:
                     state = .finished
                 case 0:
                     state = .empty
