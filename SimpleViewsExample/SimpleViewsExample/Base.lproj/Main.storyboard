@@ -126,6 +126,7 @@
                     </view>
                     <connections>
                         <outlet property="emptyView" destination="9Rb-SS-2jN" id="pBL-Uh-wf7"/>
+                        <outlet property="errorStackView" destination="3Pz-MO-KRf" id="ni9-cU-Dso"/>
                         <outlet property="errorSwitch" destination="fhn-5a-gqZ" id="Auz-C7-aGz"/>
                         <outlet property="errorSwitchLabel" destination="0vm-3e-jvx" id="c4R-oB-S37"/>
                         <outlet property="loadingView" destination="02M-Pq-Rtd" id="55f-fi-7UN"/>

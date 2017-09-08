@@ -21,6 +21,8 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDe
     @IBOutlet weak var loadingView: SimpleStateView!
     @IBOutlet weak var emptyView: SimpleStateView!
     
+    
+    @IBOutlet weak var errorStackView: UIStackView!
     @IBOutlet weak var errorSwitch: UISwitch!
     @IBOutlet weak var errorSwitchLabel: UILabel!
     
@@ -28,7 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        SimpleAnimation.initialize(views: [errorStackView])
         tableView.simpleDelegate = self
         tableView.isHidden = true
         
@@ -78,6 +80,7 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDe
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.initialize()
+        errorStackView.perform(animation: .rightToLeft, forDuration: 0.7, withState: .in)
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,10 +107,7 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDe
     func simpleTableView(_ simpleTableView: SimpleTableView, stateChangedFrom oldState: SimpleViewState, to state: SimpleViewState) {
         switch state {
         case .finished:
-            UIView.animate(withDuration: 0.0, animations: {
-                self.errorSwitchLabel.isHidden = true
-                self.errorSwitch.isHidden = true
-            })
+            errorStackView.perform(animation: .fade, forDuration: 0.7, withState: .out)
             break
         case .loading:
             break

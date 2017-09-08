@@ -10,6 +10,13 @@ import UIKit
 
 @objc public enum SimpleAnimation: Int {
     case none, fade, leftToRight, rightToLeft, slideUp, slideDown
+    
+    public static func initialize(views: [UIView]) {
+        for view in views {
+            view.alpha = 0.0
+            view.isHidden = true
+        }
+    }
 }
 
 public enum SimpleAnimationState {
