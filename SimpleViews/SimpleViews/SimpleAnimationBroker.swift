@@ -48,6 +48,17 @@ public class SimpleAnimationBroker {
         try self.init(forViews: views, withAnimations: animations, forDurations: durations)
     }
     
+    public convenience init(forViews views: [UIView], withAnimations animation: SimpleAnimation, forDuration durations: [Double]) throws {
+        let animations = Array(repeating: animation, count: views.count)
+        try self.init(forViews: views, withAnimations: animations, forDurations: durations)
+    }
+    
+    public convenience init(forViews views: [UIView], withAnimations animation: SimpleAnimation, forDuration duration: Double) throws {
+        let animations = Array(repeating: animation, count: views.count)
+        let durations = Array(repeating: duration, count: views.count)
+        try self.init(forViews: views, withAnimations: animations, forDurations: durations)
+    }
+    
     public convenience init(forView view: UIView, withAnimation animation: SimpleAnimation, forDuration duration: Double) {
         try! self.init(forViews: [view], withAnimations: [animation], forDurations: [duration])
     }
