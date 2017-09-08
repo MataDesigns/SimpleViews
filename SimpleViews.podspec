@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name = "SimpleViews"
-    spec.version  = "0.1.1"
+    spec.version  = "0.1.2"
     spec.summary  = "A framework to simplify complex views, like UITableView."
     spec.homepage = "https://github.com/matadesigns/simpleviews"
     spec.license  = 'MIT'
