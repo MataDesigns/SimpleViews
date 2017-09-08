@@ -26,7 +26,7 @@ extension UIView {
     ///   - toCenter: The point you want to animate the view to
     ///   - options: Animation options like curveEaseIn
     ///   - isIn: Whether the animation is a in or out. Basically at end of animation should the view be hidden or displayed.
-    public func animate(for duration: TimeInterval, fromCenter: CGPoint, toCenter: CGPoint, options: UIViewAnimationOptions, isIn: Bool) {
+    public func animate(for duration: TimeInterval, fromCenter: CGPoint, toCenter: CGPoint, options: UIViewAnimationOptions, isIn: Bool, completion: ((Bool) -> Swift.Void)? = nil) {
         let originalCenter = self.center;
         self.center = fromCenter
         self.alpha = 1
@@ -36,11 +36,29 @@ extension UIView {
         }, completion: { (completed) in
             self.isHidden = !isIn
             self.center = originalCenter
+            completion?(completed)
         })
     }
     
+    /// Performs a SimpleAnimation on a view with state, with a default duration of 0.7
+    ///
+    /// - Parameters:
+    ///   - animation: The SimpleAnimation that should be performed on this view.
+    ///   - state: The SimpleAnimationState of the SimpleAnimation either in or out.
+    ///   - completion: A block called when animation is completed.
+    public func perform(animation: SimpleAnimation, withState state: SimpleAnimationState, completion: ((Bool) -> Swift.Void)? = nil) {
+        self.perform(animation: animation, forDuration: 0.7, withState: state, completion: completion)
+    }
     
-    func perform(animation: SimpleAnimation, withState state: SimpleAnimationState) {
+    
+    /// Performs a SimpleAnimation on a view with state.
+    ///
+    /// - Parameters:
+    ///   - animation: The SimpleAnimation that should be performed on this view.
+    ///   - duration: The duration of the animation.
+    ///   - state: The SimpleAnimationState of the SimpleAnimation either in or out.
+    ///   - completion: A block called when animation is completed.
+    public func perform(animation: SimpleAnimation, forDuration duration: Double, withState state: SimpleAnimationState, completion: ((Bool) -> Swift.Void)? = nil) {
         
         // Since we are animating this view make sure it
         // is NOT hidden, or user won't be able to view animation.
@@ -50,8 +68,7 @@ extension UIView {
         let isIn = state == .in
         // TODO: Possibly allow this to be set from delegate.
         let animationOptions = (isIn ? UIViewAnimationOptions.curveEaseIn : UIViewAnimationOptions.curveEaseOut)
-        // TODO: Possibly allow duration to be set from delegate. Allowing for different duration each time.
-        let duration = 0.7
+
         // Screen Dimensions
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
@@ -89,6 +106,7 @@ extension UIView {
             _to   = isIn ? originalCenter : CGPoint(x: originalCenter.x, y: screenHeight+self.center.y)
         case .none:
             // No animation just simple display or hide view.
+            self.alpha = isIn ? 1 : 0
             self.isHidden = !isIn
         }
         
@@ -98,32 +116,6 @@ extension UIView {
         }
         
         // Animate the view.
-        self.animate(for: duration, fromCenter: from, toCenter: to, options: animationOptions, isIn: isIn)
+        self.animate(for: duration, fromCenter: from, toCenter: to, options: animationOptions, isIn: isIn, completion: completion)
     }
 }
-
-//public class SimpleAnimation {
-//    
-//    /// Animates a view using center.
-//    ///
-//    /// - Parameters:
-//    ///   - view: The view you would like to animate.
-//    ///   - duration: The duration of the animation.
-//    ///   - fromCenter: The point you want to animate the view from.
-//    ///   - toCenter: The point you want to animate the view to
-//    ///   - options: Animation options like curveEaseIn
-//    ///   - isIn: Whether the animation is a in or out. Basically at end of animation should the view be hidden or displayed.
-//    public static func animate(_ view: UIView, for duration: TimeInterval, fromCenter: CGPoint, toCenter: CGPoint, options: UIViewAnimationOptions, isIn: Bool) {
-//        let originalCenter = view.center;
-//        view.center = fromCenter
-//        view.alpha = 1
-//        
-//        UIView.animate(withDuration: duration, delay: 0.0, options: options, animations: {
-//            view.center = toCenter
-//        }, completion: { (completed) in
-//            view.isHidden = !isIn
-//            view.center = originalCenter
-//        })
-//    }
-//    
-//}
