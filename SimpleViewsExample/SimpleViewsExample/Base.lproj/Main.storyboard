@@ -60,14 +60,14 @@
                                 </subviews>
                             </stackView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ODb-0c-ji4" customClass="SimpleTableView" customModule="SimpleViews">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostCell" rowHeight="80" id="tdJ-fw-2O5" customClass="PostCell" customModule="SimpleViewsExample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="80"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tdJ-fw-2O5" id="DGa-cZ-PkD">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sA4-ge-HzX">
@@ -112,14 +112,14 @@
                         <constraints>
                             <constraint firstItem="02M-Pq-Rtd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="3l0-uO-QZH"/>
                             <constraint firstItem="9Rb-SS-2jN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6bX-dG-9Iw"/>
-                            <constraint firstItem="ODb-0c-ji4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="6zG-aH-Owd"/>
+                            <constraint firstItem="ODb-0c-ji4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6zG-aH-Owd"/>
                             <constraint firstItem="9Rb-SS-2jN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BHW-7X-ybk"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ODb-0c-ji4" secondAttribute="bottom" id="MKb-Sp-fQr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Pz-MO-KRf" secondAttribute="trailing" constant="8" id="U1h-hQ-4Lk"/>
                             <constraint firstItem="02M-Pq-Rtd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VRU-6h-0la"/>
                             <constraint firstItem="3Pz-MO-KRf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="11" id="WNA-Ko-rQA"/>
                             <constraint firstItem="ODb-0c-ji4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="eOZ-DT-XIF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ODb-0c-ji4" secondAttribute="trailing" id="j0o-cV-LLA"/>
+                            <constraint firstAttribute="trailing" secondItem="ODb-0c-ji4" secondAttribute="trailing" id="j0o-cV-LLA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="02M-Pq-Rtd" secondAttribute="trailing" constant="20" id="jWr-Ha-Rvz"/>
                             <constraint firstItem="02M-Pq-Rtd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xeZ-vF-YII"/>
                         </constraints>

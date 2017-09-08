@@ -26,11 +26,13 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDe
     @IBOutlet weak var errorSwitch: UISwitch!
     @IBOutlet weak var errorSwitchLabel: UILabel!
     
+    var enterAnimationBroker: SimpleAnimationBroker!
+    
     var posts = [[String:Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SimpleAnimation.initialize(views: [errorStackView])
+        enterAnimationBroker = SimpleAnimationBroker(forView: errorStackView, withAnimation: .rightToLeft, forDuration: 0.7)
         tableView.simpleDelegate = self
         tableView.isHidden = true
         
@@ -80,7 +82,9 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDe
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.initialize()
-        errorStackView.perform(animation: .rightToLeft, forDuration: 0.7, withState: .in)
+        if enterAnimationBroker.state == .initial {
+            enterAnimationBroker.performIn()
+        }
     }
     
     override func didReceiveMemoryWarning() {
