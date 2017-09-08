@@ -40,17 +40,6 @@ extension UIView {
         })
     }
     
-    /// Performs a SimpleAnimation on a view with state, with a default duration of 0.7
-    ///
-    /// - Parameters:
-    ///   - animation: The SimpleAnimation that should be performed on this view.
-    ///   - state: The SimpleAnimationState of the SimpleAnimation either in or out.
-    ///   - completion: A block called when animation is completed.
-    public func perform(animation: SimpleAnimation, withState state: SimpleAnimationState, completion: ((Bool) -> Swift.Void)? = nil) {
-        self.perform(animation: animation, forDuration: 0.7, withState: state, completion: completion)
-    }
-    
-    
     /// Performs a SimpleAnimation on a view with state.
     ///
     /// - Parameters:
@@ -58,7 +47,7 @@ extension UIView {
     ///   - duration: The duration of the animation.
     ///   - state: The SimpleAnimationState of the SimpleAnimation either in or out.
     ///   - completion: A block called when animation is completed.
-    public func perform(animation: SimpleAnimation, forDuration duration: Double, withState state: SimpleAnimationState, completion: ((Bool) -> Swift.Void)? = nil) {
+    public func perform(animation: SimpleAnimation, forDuration duration: Double = 0.7, withState state: SimpleAnimationState, completion: ((Bool) -> Swift.Void)? = nil) {
         
         // Since we are animating this view make sure it
         // is NOT hidden, or user won't be able to view animation.
