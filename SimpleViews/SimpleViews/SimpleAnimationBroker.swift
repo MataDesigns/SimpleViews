@@ -53,10 +53,10 @@ public class SimpleAnimationBroker {
         try self.init(forViews: views, withAnimations: animations, forDurations: durations)
     }
     
-    public convenience init(forViews views: [UIView], withAnimations animation: SimpleAnimation, forDuration duration: Double) throws {
+    public convenience init(forViews views: [UIView], withAnimations animation: SimpleAnimation, forDuration duration: Double) {
         let animations = Array(repeating: animation, count: views.count)
         let durations = Array(repeating: duration, count: views.count)
-        try self.init(forViews: views, withAnimations: animations, forDurations: durations)
+        try! self.init(forViews: views, withAnimations: animations, forDurations: durations)
     }
     
     public convenience init(forView view: UIView, withAnimation animation: SimpleAnimation, forDuration duration: Double) {

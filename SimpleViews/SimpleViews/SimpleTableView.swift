@@ -16,7 +16,7 @@ import UIKit
     ///   - simpleTableView: The SimpleTableView object requesting this information.
     ///   - state: The state for which we would like the view for.
     /// - Returns: The view that should be displayed when in this state.
-    func simpleTableView(_ simpleTableView: SimpleTableView, viewFor state: SimpleViewState) -> UIView
+    func simpleTableView(_ simpleTableView:SimpleTableView, viewFor state:SimpleViewState) -> UIView
     
     /// The animation for given state.
     ///
@@ -24,15 +24,25 @@ import UIKit
     ///   - simpleTableView: The SimpleTableView object requesting this information.
     ///   - state: The state for which we would like the animation for.
     /// - Returns: The animation that should be performed when view is entering or leaving this state.
-    func simpleTableView(_ simpleTableView: SimpleTableView, animationFor state: SimpleViewState) -> SimpleAnimation
+    func simpleTableView(_ simpleTableView:SimpleTableView, animationFor state:SimpleViewState) -> SimpleAnimation
     
-    /// Optional: The duration for an both an in and out animation. Without this default is 0.7
+    
+    /// Optional: Whether an animation from one state to another should be animated
+    ///
+    /// - Parameters:
+    ///   - simpleTableView: The SimpleTableView object requesting this information.
+    ///   - oldState: The old state of the SimpleTableView
+    ///   - state: The current state of the SimpleTableView
+    /// - Returns: Whether animation should occur.
+    @objc optional func simpleTableView(_ simpleTableView:SimpleTableView, shouldAnimateFromState oldState:SimpleViewState, to state:SimpleViewState) -> Bool
+    
+    /// Optional: The duration for an both an in and out animation. Without this default for all animations is 0.7 this can be changed using tableView.defaultDuration.
     ///
     /// - Parameters:
     ///   - simpleTableView: The SimpleTableView object requesting this information.
     ///   - state: The state for which we would like the animation duration for.
     /// - Returns: The animation duration for that state.
-    @objc optional func simpleTableView(_ simpleTableView: SimpleTableView, animationDuration state: SimpleViewState) -> Double
+    @objc optional func simpleTableView(_ simpleTableView:SimpleTableView, animationDuration state:SimpleViewState) -> Double
     
     /// Optional: The out animation when leaving a specific state. If function not implemented default out animation for
     /// simpleTableView(_ simpleTableView: SimpleTableView, animationFor state: SimpleViewState) -> SimpleAnimation will be used.
@@ -41,7 +51,7 @@ import UIKit
     ///   - simpleTableView: The SimpleTableView object requesting this information.
     ///   - state: The state for which we would like the out animation for.
     /// - Returns: The out animation that should be performed when view is leaving this state.
-    @objc optional func simpleTableView(_ simpleTableView: SimpleTableView, outAnimationFor state: SimpleViewState) -> SimpleAnimation
+    @objc optional func simpleTableView(_ simpleTableView:SimpleTableView, outAnimationFor state:SimpleViewState) -> SimpleAnimation
     
     /// Optional: Notification for whenever SimpleTableView state is changed.
     ///
@@ -49,7 +59,7 @@ import UIKit
     ///   - simpleTableView: The SimpleTableView that is notifying the change.
     ///   - oldState: The old state of the SimpleTableView.
     ///   - state: The new state of the SimpleTableView.
-    @objc optional func simpleTableView(_ simpleTableView: SimpleTableView, stateChangedFrom oldState: SimpleViewState, to state: SimpleViewState)
+    @objc optional func simpleTableView(_ simpleTableView:SimpleTableView, stateChangedFrom oldState:SimpleViewState, to state:SimpleViewState)
 }
 
 public class SimpleTableView: UITableView {
@@ -57,19 +67,22 @@ public class SimpleTableView: UITableView {
     /// Current state of the TableView.
     public var state: SimpleViewState = .loading {
         didSet {
-            // Only do something when state has changed to a different value.
-            if oldValue == state {
-                return
-            }
-            DispatchQueue.global(qos: .background).sync {
-                // Notify delegate that the state did change.
-                self.simpleDelegate?.simpleTableView?(self, stateChangedFrom: oldValue, to: state)
-            }
-            
             // In order to perform animations simpleDelegate must be set.
             guard let simpleDelegate = self.simpleDelegate else {
                 return
             }
+            
+            // Whether animation should happen.
+            let shouldAnimate = simpleDelegate.simpleTableView?(self, shouldAnimateFromState: oldValue, to: state)
+            if !(shouldAnimate ?? true) {
+                return
+            }
+            
+            DispatchQueue.global(qos: .background).sync {
+                // Notify delegate that the state did change.
+                simpleDelegate.simpleTableView?(self, stateChangedFrom: oldValue, to: state)
+            }
+            
             // Get view for previous state.
             let previousView = simpleDelegate.simpleTableView(self, viewFor: oldValue)
             // Get out animation for previous state.
@@ -85,13 +98,16 @@ public class SimpleTableView: UITableView {
             // Only perform animation if views are different.
             if previousView != view {
                 // Perform out animation for previous state.
-                previousView.perform(animation: outAnimation!, forDuration: outDuration ?? defaultDuration, withState: .out)
-                // Get in animation for current state.
-                let inAnimation = simpleDelegate.simpleTableView(self, animationFor: state)
-                // Get in animation duration for current state.
-                let inDuration = simpleDelegate.simpleTableView?(self, animationDuration: state)
-                // Perform in animation for current state.
-                view.perform(animation: inAnimation, forDuration: inDuration ?? defaultDuration, withState: .in)
+                previousView.perform(animation: outAnimation!, forDuration: outDuration ?? defaultDuration, withState: .out) {
+                    (completed) in
+                    
+                    // Get in animation for current state.
+                    let inAnimation = simpleDelegate.simpleTableView(self, animationFor: self.state)
+                    // Get in animation duration for current state.
+                    let inDuration = simpleDelegate.simpleTableView?(self, animationDuration: self.state)
+                    // Perform in animation for current state.
+                    view.perform(animation: inAnimation, forDuration: inDuration ?? self.defaultDuration, withState: .in)
+                }
             }
         }
     }
