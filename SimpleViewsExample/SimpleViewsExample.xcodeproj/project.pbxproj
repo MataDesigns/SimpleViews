@@ -14,8 +14,6 @@
 		A11A02971F2D27B90041B56A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11A02951F2D27B90041B56A /* LaunchScreen.storyboard */; };
 		A11A02A21F2D27B90041B56A /* SimpleViewsExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A02A11F2D27B90041B56A /* SimpleViewsExampleTests.swift */; };
 		A11A02AD1F2D27BA0041B56A /* SimpleViewsExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A02AC1F2D27BA0041B56A /* SimpleViewsExampleUITests.swift */; };
-		A120ECEC1F396B06001DF2B3 /* SimpleViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1BBD0601F2D33E7009967D6 /* SimpleViews.framework */; };
-		A120ECED1F396B06001DF2B3 /* SimpleViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1BBD0601F2D33E7009967D6 /* SimpleViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,17 +34,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A120ECEE1F396B06001DF2B3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				A120ECED1F396B06001DF2B3 /* SimpleViews.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A157DBF51F39750600936943 /* Embed PlugIns */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -55,6 +42,16 @@
 			files = (
 			);
 			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1CA908D1F840ACD00B4710B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -81,7 +78,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A120ECEC1F396B06001DF2B3 /* SimpleViews.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,8 +168,8 @@
 				A11A02851F2D27B90041B56A /* Sources */,
 				A11A02861F2D27B90041B56A /* Frameworks */,
 				A11A02871F2D27B90041B56A /* Resources */,
-				A120ECEE1F396B06001DF2B3 /* Embed Frameworks */,
 				A157DBF51F39750600936943 /* Embed PlugIns */,
+				A1CA908D1F840ACD00B4710B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

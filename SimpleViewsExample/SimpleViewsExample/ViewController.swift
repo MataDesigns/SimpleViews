@@ -58,11 +58,11 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDe
                     DispatchQueue.main.sync {
                         self.errorSwitchLabel.textColor = .lightGray
                         self.errorSwitch.isEnabled = false
-                    }
-                    
-                    guard !self.errorSwitch.isOn else {
-                        self.tableView.state = .failed
-                        return
+                        
+                        guard !self.errorSwitch.isOn else {
+                            self.tableView.state = .failed
+                            return
+                        }
                     }
                     
                     self.posts.append(contentsOf: json)
@@ -83,7 +83,13 @@ class ViewController: UIViewController, UITableViewDataSource, SimpleTableViewDe
         super.viewDidAppear(animated)
         tableView.initialize()
         if enterAnimationBroker.state == .initial {
-            enterAnimationBroker.performIn()
+            enterAnimationBroker.performIn(completion: { (completed) in
+                print("Enter Animation Broker Completed")
+                self.loadingView.scaleBy(x: 1.2, y: 1.2, withState: .in, completion: {
+                    (completed) in
+                        self.loadingView.scaleBy(x: 0, y: 0, withState: .out)
+                })
+            })
         }
     }
     

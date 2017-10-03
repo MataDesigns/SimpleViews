@@ -47,6 +47,19 @@ extension UIView {
         })
     }
     
+    public func scaleBy(x: CGFloat, y: CGFloat, withDuration duration: Double = 0.7, withState state: SimpleAnimationState, completion: ((Bool) -> Void)? = nil) {
+        // Whether the transition is a in or out.
+        let isIn = state == .in
+        // TODO: Possibly allow this to be set from delegate.
+        let animationOptions = (isIn ? UIViewAnimationOptions.curveEaseIn : UIViewAnimationOptions.curveEaseOut)
+        
+        UIView.animate(withDuration: duration, delay: 0.0, options: animationOptions, animations: {
+            self.transform = isIn ? CGAffineTransform(scaleX: x, y: y) : CGAffineTransform.identity
+        }) { (completed) in
+            completion?(completed)
+        }
+    }
+    
     /// Performs a SimpleAnimation on a view with state.
     ///
     /// - Parameters:
@@ -54,7 +67,7 @@ extension UIView {
     ///   - duration: The duration of the animation.
     ///   - state: The SimpleAnimationState of the SimpleAnimation either in or out.
     ///   - completion: A block called when animation is completed.
-    public func perform(animation: SimpleAnimation, forDuration duration: Double = 0.7, withState state: SimpleAnimationState, completion: ((Bool) -> Swift.Void)? = nil) {
+    public func perform(animation: SimpleAnimation, forDuration duration: Double = 0.7, withState state: SimpleAnimationState, completion: ((Bool) -> Void)? = nil) {
         
         // Since we are animating this view make sure it
         // is NOT hidden, or user won't be able to view animation.
@@ -83,6 +96,7 @@ extension UIView {
                 self.alpha = isIn ? 1 : 0
             }, completion: { (completed) in
                 self.isHidden = !isIn
+                completion?(completed)
             })
         case .leftToRight:
             // Make view animate coming in from the left of the screen and exiting to the right.
