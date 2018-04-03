@@ -143,7 +143,8 @@ public class SimpleTableView: UITableView {
             return
         }
         
-        for state in iterateEnum(SimpleViewState.self) {
+        
+        for state in SimpleViewState.all {
             if(state != self.state) {
                 let view = simpleDelegate.simpleTableView(self, viewFor: state)
                 initialize(view: view)
@@ -159,16 +160,6 @@ public class SimpleTableView: UITableView {
     private func initialize(view: UIView) {
         view.isHidden = true
         view.alpha = 0.0
-    }
-    
-    private func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
-        var i = 0
-        return AnyIterator {
-            let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
-            if next.hashValue != i { return nil }
-            i += 1
-            return next
-        }
     }
     
     public override func reloadData() {

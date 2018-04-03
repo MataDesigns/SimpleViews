@@ -14,6 +14,8 @@
 		A11A02971F2D27B90041B56A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11A02951F2D27B90041B56A /* LaunchScreen.storyboard */; };
 		A11A02A21F2D27B90041B56A /* SimpleViewsExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A02A11F2D27B90041B56A /* SimpleViewsExampleTests.swift */; };
 		A11A02AD1F2D27BA0041B56A /* SimpleViewsExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A02AC1F2D27BA0041B56A /* SimpleViewsExampleUITests.swift */; };
+		A1A74A631F89AD5100D7B7E7 /* SimpleViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A74A621F89AD5100D7B7E7 /* SimpleViews.framework */; };
+		A1A74A641F89AD5100D7B7E7 /* SimpleViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1A74A621F89AD5100D7B7E7 /* SimpleViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A1A74A641F89AD5100D7B7E7 /* SimpleViews.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +73,7 @@
 		A11A02A81F2D27BA0041B56A /* SimpleViewsExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleViewsExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11A02AC1F2D27BA0041B56A /* SimpleViewsExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleViewsExampleUITests.swift; sourceTree = "<group>"; };
 		A11A02AE1F2D27BA0041B56A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1A74A621F89AD5100D7B7E7 /* SimpleViews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SimpleViews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1BBD0601F2D33E7009967D6 /* SimpleViews.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimpleViews.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SimpleViews-ewelyfmwmuclwafseldfybkndpym/Build/Products/Debug-iphonesimulator/SimpleViews.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A74A631F89AD5100D7B7E7 /* SimpleViews.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +106,7 @@
 		A11A02801F2D27B90041B56A = {
 			isa = PBXGroup;
 			children = (
+				A1A74A621F89AD5100D7B7E7 /* SimpleViews.framework */,
 				A11A028B1F2D27B90041B56A /* SimpleViewsExample */,
 				A11A02A01F2D27B90041B56A /* SimpleViewsExampleTests */,
 				A11A02AB1F2D27BA0041B56A /* SimpleViewsExampleUITests */,
@@ -454,7 +460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72NH26LUXP;
 				INFOPLIST_FILE = SimpleViewsExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.matadesigns.SimpleViewsExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -468,7 +474,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72NH26LUXP;
 				INFOPLIST_FILE = SimpleViewsExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.matadesigns.SimpleViewsExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";

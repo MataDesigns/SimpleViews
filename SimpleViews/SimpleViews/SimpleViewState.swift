@@ -10,4 +10,6 @@ import Foundation
 
 @objc public enum SimpleViewState: Int {
     case loading, empty, finished, failed
+    
+    static let all = [loading, empty, finished, failed]
 }
