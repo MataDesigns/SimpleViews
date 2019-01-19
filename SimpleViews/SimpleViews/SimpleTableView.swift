@@ -162,7 +162,22 @@ public class SimpleTableView: UITableView {
         view.alpha = 0.0
     }
     
+    public override func deleteRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+        self.updateState()
+        super.deleteRows(at: indexPaths, with: animation)
+    }
+    
+    public override func insertRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+        self.updateState()
+        super.insertRows(at: indexPaths, with: animation)
+    }
+    
     public override func reloadData() {
+        self.updateState()
+        super.reloadData()
+    }
+    
+    func updateState() {
         if state != .failed {
             if fetched {
                 // Set states based off row count.
@@ -178,7 +193,5 @@ public class SimpleTableView: UITableView {
                 state = .loading
             }
         }
-        
-        super.reloadData()
     }
 }
