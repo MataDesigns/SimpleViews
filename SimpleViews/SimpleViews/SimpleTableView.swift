@@ -127,7 +127,7 @@ public class SimpleTableView: UITableView {
     private var totalRows: Int {
         get{
             var totalRows = 0
-            for i in 0 ..< (self.dataSource?.numberOfSections?(in: self) ?? 0) {
+            for i in 0 ..< (self.dataSource?.numberOfSections?(in: self) ?? 1) {
                 let rowsInSection = self.dataSource?.tableView(self, numberOfRowsInSection: i) ?? 0
                 totalRows += rowsInSection
             }
