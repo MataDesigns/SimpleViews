@@ -162,12 +162,12 @@ public class SimpleTableView: UITableView {
         view.alpha = 0.0
     }
     
-    public override func deleteRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+    public override func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.updateState()
         super.deleteRows(at: indexPaths, with: animation)
     }
     
-    public override func insertRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+    public override func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.updateState()
         super.insertRows(at: indexPaths, with: animation)
     }

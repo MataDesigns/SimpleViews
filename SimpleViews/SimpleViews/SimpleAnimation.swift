@@ -33,7 +33,7 @@ extension UIView {
     ///   - toCenter: The point you want to animate the view to
     ///   - options: Animation options like curveEaseIn
     ///   - isIn: Whether the animation is a in or out. Basically at end of animation should the view be hidden or displayed.
-    public func animate(for duration: TimeInterval, fromCenter: CGPoint, toCenter: CGPoint, options: UIViewAnimationOptions, isIn: Bool, completion: ((Bool) -> Swift.Void)? = nil) {
+    public func animate(for duration: TimeInterval, fromCenter: CGPoint, toCenter: CGPoint, options: UIView.AnimationOptions, isIn: Bool, completion: ((Bool) -> Swift.Void)? = nil) {
         let originalCenter = self.center;
         self.center = fromCenter
         self.alpha = 1
@@ -51,7 +51,7 @@ extension UIView {
         // Whether the transition is a in or out.
         let isIn = state == .in
         // TODO: Possibly allow this to be set from delegate.
-        let animationOptions = (isIn ? UIViewAnimationOptions.curveEaseIn : UIViewAnimationOptions.curveEaseOut)
+        let animationOptions = (isIn ? UIView.AnimationOptions.curveEaseIn : UIView.AnimationOptions.curveEaseOut)
         
         UIView.animate(withDuration: duration, delay: 0.0, options: animationOptions, animations: {
             self.transform = isIn ? CGAffineTransform(scaleX: x, y: y) : CGAffineTransform.identity
@@ -76,7 +76,7 @@ extension UIView {
         // Whether the transition is a in or out.
         let isIn = state == .in
         // TODO: Possibly allow this to be set from delegate.
-        let animationOptions = (isIn ? UIViewAnimationOptions.curveEaseIn : UIViewAnimationOptions.curveEaseOut)
+        let animationOptions = (isIn ? UIView.AnimationOptions.curveEaseIn : UIView.AnimationOptions.curveEaseOut)
 
         // Screen Dimensions
         let screenWidth = UIScreen.main.bounds.width
